@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
-import 'package:shelf_router/shelf_router.dart';
+import 'package:shelf_router/shelf_router.dart' as shelf; // أضفنا اسم مستعار هنا
 
 void main() {
   runApp(const ClipboardReceiverApp());
@@ -51,7 +51,8 @@ class _HomeScreenState extends State<HomeScreen> {
     final info = NetworkInfo();
     final ip = await info.getWifiIP() ?? 'غير متصل بالواي فاي';
 
-    final router = Router();
+    // استخدام الـ Router الخاص بمكتبة الـ shelf مع الاسم المستعار
+    final router = shelf.Router();
 
     // مسار استقبال النص من الحاسوب
     router.post('/send-text', (Request request) async {
